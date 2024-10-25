@@ -1,0 +1,31 @@
+#Prerequisite:
+1. One server with minimum 1GB RAM
+2. One virtual machine like VMwareWorkstation Pro
+3. Ubuntu 22.04 LTS OS
+
+#Wrok Process: 
+
+1. first of all create a server using VMware 
+2. After create a server. change the MAC address of the new created server.
+3. set dhcp network using nano: 
+
+this is the command: sudo nano /etc/netplan/00-installer-config.yaml
+#yaml format: 
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: false
+      addresses:
+        - 192.168.31.151/24
+      routes:
+        - to: default
+          via: 192.168.31.2
+      nameservers:
+        addresses: [8.8.8.8, 1.1.1.1]
+
+4. after config or change the dhcp ip, then set and allow the dhcp using this command: 
+ netplan apply
+
+5. 
